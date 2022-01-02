@@ -22,10 +22,18 @@
   width: 100%;
   border-radius: 0 0 5px 5px;
   background: #ffffff;
+  max-height: 300px;
+  overflow: auto;
 }
 
 .search .search-result .search-result-item {
-  padding: 10px 15px;
+  padding: 5px 15px;
+  display: flex;
+  align-items: center;
+}
+
+.search .search-result .search-result-item:hover {
+  background: antiquewhite;
 }
 
 .search .result-not-found {
@@ -34,4 +42,9 @@
   font-size: 14px;
   color: #000;
   opacity: 0.5;
+}
+
+.search-result-item-img{
+  height: 75px;
+  margin-right: 10px;
 }

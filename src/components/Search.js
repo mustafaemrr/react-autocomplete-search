@@ -1,24 +1,7 @@
 import {useEffect, useState, useRef} from 'react'
 import './Search.css';
 
-const data = [
-  {
-    id: 1,
-    title: 'Test 1'
-  },
-  {
-    id: 2,
-    title: 'Test 2'
-  },
-  {
-    id: 3,
-    title: 'Test 3'
-  },
-  {
-    id: 4,
-    title: 'Test 4'
-  }
-];
+const data = [];
 
 function Search() {
   const [search, setSearch] = useState('');
@@ -47,6 +30,10 @@ function Search() {
     } else {
       setResult([]);
     }
+    
+    fetch(`https://api.themoviedb.org/3/search/movie?query=${search}&api_key=${process.env.REACT_APP_API_KEY}`)
+    .then(res => res.json())
+    .then(data => setResult(data.results))
   }, [search])
 
   return (
@@ -57,7 +44,19 @@ function Search() {
           <div className="search-result">
             {result && result.map(item=> (
               <div key={item.id} className="search-result-item">
-                {item.title}
+                {
+                  item.poster_path && (
+                    <img className="search-result-item-img" src={`http://image.tmdb.org/t/p/w500/${item.poster_path}`} alt="" />
+                  )
+                }
+                <div>
+                <div className="search-result-item-title">
+                  {item.title}
+                </div>
+                <div className="search-result-item-imdb">
+                  &#11088; {item.vote_average}
+                </div>
+                </div>
               </div>
             ))}
 
